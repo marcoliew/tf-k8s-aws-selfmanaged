@@ -1,0 +1,4 @@
+curl -L -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/Global/Windows.gitignore
+curl -L -o .gitignore https://www.toptal.com/developers/gitignore/api/python,terraform,ubuntu,aws
+curl -L -o .gitignore https://www.toptal.com/developers/gitignore/api/{languages,platforms,tools}
+
