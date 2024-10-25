@@ -56,7 +56,8 @@ resource "aws_instance" "k8s_node" {
   })
   root_block_device {
     volume_size = 30  
-    volume_type = "gp2" 
+    volume_type = "gp2"
+    encrypted   = true  # Enable encryption 
   }
   tags = {
     Name = "${local.env}_${local.project_name}_k8s_node_xyz"
