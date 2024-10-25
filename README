@@ -2,3 +2,5 @@ curl -L -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/Gl
 curl -L -o .gitignore https://www.toptal.com/developers/gitignore/api/python,terraform,ubuntu,aws
 curl -L -o .gitignore https://www.toptal.com/developers/gitignore/api/{languages,platforms,tools}
 
+aws ssm start-session --target i-0e66d75bb10d483d0
+aws ssm start-session --target i-02bb1048ddd1de8b0
