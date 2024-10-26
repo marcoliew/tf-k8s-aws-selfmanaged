@@ -18,3 +18,45 @@ Embedded Token in Configuration: Tokens can be embedded within the backend confi
 If login is successful, Terraform will store the token in plain text in
 the following file for use by subsequent commands:
 /home/marco/.terraform.d/credentials.tfrc.json
+
+# For multi account handling:
+
+1. inject role for different account using variable or environment
+
+env:
+  AWS_ROLE_DEV: arn:aws:iam::ACCOUNT_ID_DEV:role/GitHubAction-AssumeRoleWithAction
+  AWS_ROLE_PROD: arn:aws:iam::ACCOUNT_ID_PROD:role/GitHubAction-AssumeRoleWithAction
+
+    - name: Configure AWS credentials for OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+            role-to-assume: ${{ env.AWS_ROLE_DEV }} # or use another account role here
+            aws-region: ap-southeast-2
+            audience: sts.amazonaws.com
+
+env:
+  TF_WORKSPACE_NAME: "tf-k8s-aws-${{ github.event.inputs.env }}"
+
+# Set the workspace
+- name: Select Terraform Workspace
+  run: terraform workspace select ${{ env.TF_WORKSPACE_NAME }} || terraform workspace new ${{ env.TF_WORKSPACE_NAME }}
+
+2. Dynamically Update Terraform Cloud Workspace Name in provider.tf
+
+env:
+  TF_WORKSPACE_NAME: "tf-k8s-aws-${{ github.event.inputs.env }}"
+
+# Set the workspace
+- name: Select Terraform Workspace
+  run: terraform workspace select ${{ env.TF_WORKSPACE_NAME }} || terraform workspace new ${{ env.TF_WORKSPACE_NAME }}
+
+update provider.tf
+
+terraform {
+  backend "remote" {
+    organization = "xeniumsolution"
+    workspaces {
+      name = terraform.workspace
+    }
+  }
+}
