@@ -17,6 +17,8 @@ terraform {
   #     name = "tf-k8s-aws-selfmanaged"
   #   }
   # }
+  backend "remote" {}
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
