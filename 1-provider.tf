@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "ap-southeast-2" # local.region
+  region = local.region
   # assume_role {
   #   role_arn = "arn:aws:iam::058264095432:role/GitHubAction-AssumeRoleWithAction"
   # }
@@ -20,7 +20,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.49"
+      version = "~> 5.73"
     }
   }
 
