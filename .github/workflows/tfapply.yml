@@ -95,20 +95,20 @@ jobs:
         terraform_version: 1.9.8
 
     - name: Set Terraform Cloud Token
-      run: echo "TF_CLOUD_TOKEN=${{ secrets.TF_API_TOKEN }}" >> $GITHUB_ENV  # Set the environment variable
+      run: echo "TF_TOKEN_app_terraform_io=${{ secrets.TF_API_TOKEN }}" >> $GITHUB_ENV  # Set the environment variable
 
     - name: Verify Terraform Cloud Token
       run: |
-        if [ -z "$TF_CLOUD_TOKEN" ]; then
-          echo "TF_CLOUD_TOKEN is not set!"
+        if [ -z "$TF_TOKEN_app_terraform_io" ]; then
+          echo "TF_TOKEN_app_terraform_io is not set!"
           exit 1
         else
-          echo "TF_CLOUD_TOKEN is set."
+          echo "TF_TOKEN_app_terraform_io is set."
         fi
 
     - name: Partial Token Preview (for troubleshooting only)
       run: |
-        echo "TF_CLOUD_TOKEN starts with: ${TF_CLOUD_TOKEN:0:5}****"        
+        echo "TF_TOKEN_app_terraform_io starts with: ${TF_TOKEN_app_terraform_io:0:5}****"        
   
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
