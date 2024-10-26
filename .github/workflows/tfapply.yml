@@ -67,7 +67,7 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    #environment: production
+    environment: production
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -83,7 +83,7 @@ jobs:
     - name: Configure AWS credentials for OIDC
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: ${{ env.AWS_ROLE_PROD }} # arn:aws:iam::058264095432:role/GitHubAction-AssumeRoleWithAction
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.ROLE_NAME }} # ${{ env.AWS_ROLE_PROD }} # 
         #role-session-name: VIA_ODIC_AWS
         aws-region: ap-southeast-2
         audience: sts.amazonaws.com
@@ -116,12 +116,15 @@ jobs:
       run: |
         echo "TF_TOKEN_app_terraform_io starts with: ${TF_TOKEN_app_terraform_io:0:5}****"        
   
+    - name: Set Terraform Workspace
+      run: echo "TF_WORKSPACE=${{ env.TF_WORKSPACE_NAME }}" >> $GITHUB_ENV        
+
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init with Specified Workspace
       run: |
         terraform init -reconfigure \
-        -backend-config="organization=xeniumsolution" \
-        -backend-config="workspaces.name=${{ env.TF_WORKSPACE_PROD }}"
+        -backend-config="organization=xeniumsolution"
+#      -backend-config="workspaces.name=${{ env.TF_WORKSPACE_NAME }}"
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
