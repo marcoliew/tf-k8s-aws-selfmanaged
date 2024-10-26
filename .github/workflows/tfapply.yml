@@ -106,6 +106,10 @@ jobs:
           echo "TF_CLOUD_TOKEN is set."
         fi
 
+    - name: Partial Token Preview (for troubleshooting only)
+      run: |
+        echo "TF_CLOUD_TOKEN starts with: ${TF_CLOUD_TOKEN:0:5}****"        
+  
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
