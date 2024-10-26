@@ -1,5 +1,3 @@
-
-
 provider "aws" {
   region = local.region
   assume_role {
