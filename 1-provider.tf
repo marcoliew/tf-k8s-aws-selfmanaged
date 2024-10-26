@@ -1,5 +1,5 @@
 provider "aws" {
-  region = local.region
+  region = "ap-southeast-2" # local.region
   # assume_role {
   #   role_arn = "arn:aws:iam::058264095432:role/GitHubAction-AssumeRoleWithAction"
   # }
