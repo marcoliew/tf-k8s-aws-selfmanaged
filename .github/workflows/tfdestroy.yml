@@ -1,0 +1,43 @@
+name: 'Tf Destroy'
+
+# Trigger workflow manually from the Actions console
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  terraform-destroy:
+    name: 'Terraform Destroy'
+    runs-on: ubuntu-latest
+
+    steps:
+    # Check out the repository
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # Configure AWS credentials for OIDC
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::058264095432:role/GitHubAction-AssumeRoleWithAction
+        aws-region: ap-southeast-2
+        audience: sts.amazonaws.com
+
+    # Set up Terraform Cloud token (if needed for backend state storage)
+    - name: Set Terraform Cloud Token
+      run: echo "TF_TOKEN_app_terraform_io=${{ secrets.TF_API_TOKEN }}" >> $GITHUB_ENV
+
+    # Initialize Terraform
+    - name: Terraform Init
+      run: terraform init
+
+    # Plan the destroy to preview changes
+    - name: Terraform Plan Destroy
+      run: terraform plan -destroy -input=false
+
+    # Apply the destroy plan (requires manual workflow dispatch)
+    - name: Terraform Destroy
+      run: terraform destroy -auto-approve -input=false
