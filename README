@@ -4,3 +4,17 @@ curl -L -o .gitignore https://www.toptal.com/developers/gitignore/api/{languages
 
 aws ssm start-session --target i-0e66d75bb10d483d0
 aws ssm start-session --target i-02bb1048ddd1de8b0
+
+# Tf CLoud
+
+Terraform Cloud currently does not support OpenID Connect (OIDC) as a method for authentication directly within the backend "remote" block. For backend authentication with Terraform Cloud, the primary methods are:
+
+Terraform Login (terraform login): This is the most common method, where a personal access token is generated for your user and stored locally in ~/.terraform.d/credentials.tfrc.json.
+
+Environment Variable (TF_CLOUD_TOKEN): Set this environment variable in your shell or CI/CD environment to avoid storing the token locally.
+
+Embedded Token in Configuration: Tokens can be embedded within the backend configuration directly (not recommended for security reasons).
+
+If login is successful, Terraform will store the token in plain text in
+the following file for use by subsequent commands:
+/home/marco/.terraform.d/credentials.tfrc.json

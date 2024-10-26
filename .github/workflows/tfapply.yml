@@ -45,13 +45,13 @@
 name: 'tfapply'
 
 on:
-  # push:
-  #   branches: [ "main" ]
+  push:
+    branches: [ "main" ]
   # pull_request:
-  workflow_run:
-    workflows: ["tfsec"]  # Name of the workflow to depend on
-    types:
-      - completed    
+  # workflow_run:
+  #   workflows: ["tfsec"]  # Name of the workflow to depend on
+  #   types:
+  #     - completed    
 
 permissions:
   contents: read
