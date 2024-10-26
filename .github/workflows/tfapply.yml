@@ -78,10 +78,10 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: arn:aws:iam::058264095432:role/GitHubAction-AssumeRoleWithAction
-        role-session-name: VIA_ODIC_AWS
+        #role-session-name: VIA_ODIC_AWS
         aws-region: ap-southeast-2
         audience: sts.amazonaws.com
-        
+
     - name: Sts GetCallerIdentity
       run: |
         aws sts get-caller-identity
