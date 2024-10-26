@@ -46,11 +46,11 @@ output "vpc" {
 # }
 
 output "test0" {
-  value = replace(data.aws_subnet.subnet_list[data.aws_subnets.main.ids[0]].cidr_block,"0/${split("/", data.aws_subnet.subnet_list[data.aws_subnets.main.ids[0]].cidr_block)[1]}","10")
+  value = replace(data.aws_subnet.subnet_list[data.aws_subnets.main.ids[0]].cidr_block, "0/${split("/", data.aws_subnet.subnet_list[data.aws_subnets.main.ids[0]].cidr_block)[1]}", "10")
 }
 
 output "test1" {
-  value = replace(data.aws_subnet.subnet_list[data.aws_subnets.main.ids[1]].cidr_block,"0/${split("/", data.aws_subnet.subnet_list[data.aws_subnets.main.ids[1]].cidr_block)[1]}","10")
+  value = replace(data.aws_subnet.subnet_list[data.aws_subnets.main.ids[1]].cidr_block, "0/${split("/", data.aws_subnet.subnet_list[data.aws_subnets.main.ids[1]].cidr_block)[1]}", "10")
 }
 
 # output "test3" {
@@ -108,10 +108,10 @@ resource "aws_route_table_association" "b" {
 resource "aws_route" "vpc_igw" {
   #count = var.create_amqp_routes ? 1 : 0
 
-  route_table_id            = data.aws_route_table.selected.id
-  destination_cidr_block    = "0.0.0.0/0"
+  route_table_id         = data.aws_route_table.selected.id
+  destination_cidr_block = "0.0.0.0/0"
   #nat_gateway_id            = aws_nat_gateway.example.id
-  gateway_id                = aws_internet_gateway.gw.id
+  gateway_id = aws_internet_gateway.gw.id
 
   # timeouts {
   #   create = "5m"
