@@ -88,11 +88,11 @@ jobs:
         aws s3 ls
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        #cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-        terraform_version: 1.9.8
+    # - name: Setup Terraform
+    #   uses: hashicorp/setup-terraform@v1
+    #   with:
+    #     #cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+    #     terraform_version: 1.9.8
 
     - name: Set Terraform Cloud Token
       run: echo "TF_TOKEN_app_terraform_io=${{ secrets.TF_API_TOKEN }}" >> $GITHUB_ENV  # Set the environment variable
