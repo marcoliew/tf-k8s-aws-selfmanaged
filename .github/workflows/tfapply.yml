@@ -97,6 +97,14 @@ jobs:
     - name: Set Terraform Cloud Token
       run: echo "TF_CLOUD_TOKEN=${{ secrets.TF_API_TOKEN }}" >> $GITHUB_ENV  # Set the environment variable
 
+    - name: Verify Terraform Cloud Token
+      run: |
+        if [ -z "$TF_CLOUD_TOKEN" ]; then
+          echo "TF_CLOUD_TOKEN is not set!"
+          exit 1
+        else
+          echo "TF_CLOUD_TOKEN is set."
+        fi
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
