@@ -31,9 +31,14 @@ jobs:
     - name: Set Terraform Cloud Token
       run: echo "TF_TOKEN_app_terraform_io=${{ secrets.TF_API_TOKEN }}" >> $GITHUB_ENV
 
+    - name: Set Terraform Cloud Org and Workspace
+      run: |
+        echo "TF_CLOUD_ORGANIZATION=${{vars.TF_ORG}}" >> $GITHUB_ENV    
+        echo "TF_WORKSPACE=${{vars.TF_WORKSPACE_NAME}}" >> $GITHUB_ENV   
+
     # Initialize Terraform
     - name: Terraform Init
-      run: terraform init
+      run: terraform init -input=false
 
     # Plan the destroy to preview changes
     - name: Terraform Plan Destroy

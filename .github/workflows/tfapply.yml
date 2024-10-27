@@ -123,22 +123,21 @@ jobs:
       run: |
         echo "TF_TOKEN_app_terraform_io starts with: ${TF_TOKEN_app_terraform_io:0:5}****"        
   
-    # - name: Set Terraform Workspace
-    #   run: echo "TF_WORKSPACE=${{vars.TF_WORKSPACE_NAME}}" >> $GITHUB_ENV      
+    - name: Set Terraform Cloud Org and Workspace
+      run: |
+        echo "TF_CLOUD_ORGANIZATION=${{vars.TF_ORG}}" >> $GITHUB_ENV    
+        echo "TF_WORKSPACE=${{vars.TF_WORKSPACE_NAME}}" >> $GITHUB_ENV   
 
     - name: Debug Terraform Workspace
       run: echo "${{vars.TF_WORKSPACE_NAME}}"
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init with Specified Org and Workspace
-      env:
-        TF_WORKSPACE: ${{vars.TF_WORKSPACE_NAME}}  
-        TF_CLOUD_ORGANIZATION: ${{vars.TF_ORG}} 
+      # env:
+      #   TF_WORKSPACE: ${{vars.TF_WORKSPACE_NAME}}  
+      #   TF_CLOUD_ORGANIZATION: ${{vars.TF_ORG}} 
       run: |
-        terraform init \
-          -input=false
-#        -backend-config="organization=${{vars.TF_ORG}}" \
-#        -backend-config="workspaces.name=${{vars.TF_WORKSPACE_NAME}}"
+        terraform init -input=false
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
@@ -146,9 +145,9 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      env:
-        TF_WORKSPACE: ${{vars.TF_WORKSPACE_NAME}}  
-        TF_CLOUD_ORGANIZATION: ${{vars.TF_ORG}} 
+      # env:
+      #   TF_WORKSPACE: ${{vars.TF_WORKSPACE_NAME}}  
+      #   TF_CLOUD_ORGANIZATION: ${{vars.TF_ORG}} 
       run: terraform plan -input=false
 
     - name: Debug Branch Condition
@@ -159,8 +158,8 @@ jobs:
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
-      env:
-        TF_WORKSPACE: ${{vars.TF_WORKSPACE_NAME}}  
-        TF_CLOUD_ORGANIZATION: ${{vars.TF_ORG}} 
+      # env:
+      #   TF_WORKSPACE: ${{vars.TF_WORKSPACE_NAME}}  
+      #   TF_CLOUD_ORGANIZATION: ${{vars.TF_ORG}} 
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
