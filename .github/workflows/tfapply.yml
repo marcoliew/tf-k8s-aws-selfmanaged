@@ -90,7 +90,7 @@ jobs:
     - name: Configure AWS credentials for OIDC
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::${{vars.AWS_ACCOUNT_ID}}:role/${{vars.ROLE_NAME}} # ${{ env.AWS_ROLE_PROD }} # 
+        role-to-assume: arn:aws:iam::${{vars.AWS_ACCOUNT_ID}}:role/${{vars.ROLE_NAME}}
         #role-session-name: VIA_ODIC_AWS
         aws-region: ap-southeast-2
         audience: sts.amazonaws.com
