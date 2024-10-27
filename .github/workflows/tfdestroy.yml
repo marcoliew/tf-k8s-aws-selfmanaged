@@ -12,7 +12,7 @@ jobs:
   terraform-destroy:
     name: 'Terraform Destroy'
     runs-on: ubuntu-latest
-    # environment: production
+    environment: production
 
     steps:
     # Check out the repository
