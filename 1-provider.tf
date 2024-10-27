@@ -8,16 +8,16 @@ provider "aws" {
 terraform {
   required_version = ">= 1.0"
 
-  # backend "remote" {
-  #   # The name of your Terraform Cloud organization.
-  #   organization = "xeniumsolution"
+  backend "remote" {
+    # The name of your Terraform Cloud organization.
+    organization = "xeniumsolution"
 
-  #   # The name of the Terraform Cloud workspace to store Terraform state files in.
-  #   workspaces {
-  #     name = "tf-k8s-aws-selfmanaged"
-  #   }
-  # }
-  backend "remote" {}
+    # The name of the Terraform Cloud workspace to store Terraform state files in.
+    # workspaces {
+    #   name = "tf-k8s-aws-selfmanaged"
+    # }
+  }
+  # backend "remote" {}
 
   required_providers {
     aws = {

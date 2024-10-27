@@ -124,13 +124,16 @@ jobs:
         echo "TF_TOKEN_app_terraform_io starts with: ${TF_TOKEN_app_terraform_io:0:5}****"        
   
     # - name: Set Terraform Workspace
-    #   run: echo "TF_WORKSPACE=${{vars.TF_WORKSPACE_NAME}}" >> $GITHUB_ENV        
+    #   run: echo "TF_WORKSPACE=${{vars.TF_WORKSPACE_NAME}}" >> $GITHUB_ENV      
+
+    - name: Debug Terraform Workspace
+      run: echo "${{vars.TF_WORKSPACE_NAME}}"
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init with Specified Workspace
       run: |
         terraform init -reconfigure \
-        -backend-config="organization=xeniumsolution"
+        -backend-config="organization=xeniumsolution" \
         -backend-config="workspaces.name=${{vars.TF_WORKSPACE_NAME}}"
 
     # Checks that all Terraform configuration files adhere to a canonical format
