@@ -133,8 +133,8 @@ jobs:
     - name: Terraform Init with Specified Workspace
       run: |
         terraform init -reconfigure \
-        -backend-config="organization=xeniumsolution" \
-        -backend-config="workspaces.name=tf-k8s-aws-selfmanaged"
+        -backend-config="organization=${{vars.TF_ORG}}" \
+        -backend-config="workspaces.name=${{vars.TF_WORKSPACE_NAME}}"
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
