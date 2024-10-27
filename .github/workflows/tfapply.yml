@@ -133,8 +133,10 @@ jobs:
     - name: Terraform Init with Specified Workspace
       env:
         TF_WORKSPACE: ${{vars.TF_WORKSPACE_NAME}}  
+        TF_CLOUD_ORGANIZATION: ${{vars.TF_ORG}} 
       run: |
-        terraform init
+        terraform init \
+          -input=false \
 #        -backend-config="organization=${{vars.TF_ORG}}" \
 #        -backend-config="workspaces.name=${{vars.TF_WORKSPACE_NAME}}"
 
