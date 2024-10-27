@@ -68,9 +68,9 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
-    env:
-      AWS_ACCOUNT_ID: 058264095432
-      ROLE_NAME: GitHubAction-AssumeRoleWithAction
+    # env:
+    #   AWS_ACCOUNT_ID: 058264095432
+    #   ROLE_NAME: GitHubAction-AssumeRoleWithAction
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
@@ -90,7 +90,7 @@ jobs:
     - name: Configure AWS credentials for OIDC
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::${{env.AWS_ACCOUNT_ID}}:role/${{env.ROLE_NAME}} # ${{ env.AWS_ROLE_PROD }} # 
+        role-to-assume: arn:aws:iam::${{vars.AWS_ACCOUNT_ID}}:role/${{vars.ROLE_NAME}} # ${{ env.AWS_ROLE_PROD }} # 
         #role-session-name: VIA_ODIC_AWS
         aws-region: ap-southeast-2
         audience: sts.amazonaws.com
