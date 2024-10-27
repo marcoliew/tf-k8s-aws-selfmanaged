@@ -151,7 +151,7 @@ jobs:
       run: terraform plan -input=false -out=tfplan
 
     - name: Upload Terraform Plan
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: tfplan
         path: tfplan
@@ -174,7 +174,7 @@ jobs:
     environment: production 
     steps:        
     - name: Download Terraform Plan
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
         name: tfplan
       # On push to "main", build or change infrastructure according to Terraform configuration files
