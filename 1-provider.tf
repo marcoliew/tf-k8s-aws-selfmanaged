@@ -17,7 +17,7 @@ terraform {
   #   #   name = "tf-k8s-aws-selfmanaged"
   #   # }
   # }
-  backend "remote" {}
+  #backend "remote" {}
 
   # cloud {
   #   organization = "xeniumsolution"
