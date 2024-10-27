@@ -5,8 +5,21 @@ provider "aws" {
   # }
 }
 
+
 terraform {
   required_version = ">= 1.0"
+
+  cloud {
+    organization = "xeniumsolution"
+    # hostname = "app.terraform.io" # Optional; defaults to app.terraform.io
+
+    workspaces {
+      name = "tf-k8s-aws-selfmanaged"
+      # project = "networking-development"
+      # tags = ["networking", "source:cli"]
+    }
+  }
+
 
   # backend "remote" {
   #   # The name of your Terraform Cloud organization.
@@ -18,17 +31,6 @@ terraform {
   #   # }
   # }
   #backend "remote" {}
-
-  # cloud {
-  #   organization = "xeniumsolution"
-  #   # hostname = "app.terraform.io" # Optional; defaults to app.terraform.io
-
-  #   workspaces {
-  #     name = "tf-k8s-aws-selfmanaged"
-  #     # project = "networking-development"
-  #     # tags = ["networking", "source:cli"]
-  #   }
-  # }
 
   required_providers {
     aws = {

@@ -132,9 +132,9 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init with Specified Workspace
       run: |
-        terraform init -reconfigure \
-        -backend-config="organization=${{vars.TF_ORG}}" \
-        -backend-config="workspaces.name=${{vars.TF_WORKSPACE_NAME}}"
+        terraform init
+#        -backend-config="organization=${{vars.TF_ORG}}" \
+#        -backend-config="workspaces.name=${{vars.TF_WORKSPACE_NAME}}"
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
