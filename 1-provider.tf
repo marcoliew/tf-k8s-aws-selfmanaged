@@ -19,6 +19,17 @@ terraform {
   # }
   backend "remote" {}
 
+  # cloud {
+  #   organization = "xeniumsolution"
+  #   # hostname = "app.terraform.io" # Optional; defaults to app.terraform.io
+
+  #   workspaces {
+  #     name = "tf-k8s-aws-selfmanaged"
+  #     # project = "networking-development"
+  #     # tags = ["networking", "source:cli"]
+  #   }
+  # }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
