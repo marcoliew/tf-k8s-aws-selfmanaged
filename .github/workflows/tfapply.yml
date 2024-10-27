@@ -53,7 +53,7 @@ on:
   #   types:
   #     - completed    
 
-env:
+#env:
   #AWS_ROLE_DEV: arn:aws:iam::ACCOUNT_ID_DEV:role/GitHubAction-AssumeRoleWithAction
   #AWS_ROLE_PROD: arn:aws:iam::058264095432:role/GitHubAction-AssumeRoleWithAction
   #TF_WORKSPACE_DEV: "tf-k8s-aws-dev"
