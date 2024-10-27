@@ -55,9 +55,9 @@ on:
 
 env:
   #AWS_ROLE_DEV: arn:aws:iam::ACCOUNT_ID_DEV:role/GitHubAction-AssumeRoleWithAction
-  AWS_ROLE_PROD: arn:aws:iam::058264095432:role/GitHubAction-AssumeRoleWithAction
+  #AWS_ROLE_PROD: arn:aws:iam::058264095432:role/GitHubAction-AssumeRoleWithAction
   #TF_WORKSPACE_DEV: "tf-k8s-aws-dev"
-  TF_WORKSPACE_PROD: "tf-k8s-aws-selfmanaged"  
+  #TF_WORKSPACE_PROD: "tf-k8s-aws-selfmanaged"  
 
 permissions:
   contents: read
@@ -68,7 +68,9 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
-
+    env:
+      AWS_ACCOUNT_ID: 058264095432
+      ROLE_NAME: GitHubAction-AssumeRoleWithAction
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
