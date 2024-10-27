@@ -13,11 +13,11 @@ terraform {
     organization = "xeniumsolution"
     # hostname = "app.terraform.io" # Optional; defaults to app.terraform.io
 
-    workspaces {
-      name = "tf-k8s-aws-selfmanaged"
-      # project = "networking-development"
-      # tags = ["networking", "source:cli"]
-    }
+    # workspaces {
+    #   name = "tf-k8s-aws-selfmanaged"
+    #   # project = "networking-development"
+    #   # tags = ["networking", "source:cli"]
+    # }
   }
 
 
